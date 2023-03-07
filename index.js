@@ -42,6 +42,9 @@ app.all('/', function (req, res){
     }
     if (req.method == 'POST'){
         city = req.body.cityname
+        if (!city) {
+            return res.render('index.ejs', {error: 'Please enter valid city name'})
+        }
     }
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
     getWeatherDataPromise(url)
